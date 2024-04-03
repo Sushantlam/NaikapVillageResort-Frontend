@@ -41,7 +41,7 @@ const Hero = () => {
 
 
   return (
-    <div className='relative md:relative'>
+    <div className='relative md:relative -z-10'>
         <img src={photos[slideNum].src}  className='w-[100vw] h-[88vh] object-fill md:w-[100vw] md:h-[88vh] md:object-fill' alt="" />
         <BsArrowLeftCircle className='absolute top-72 left-1 md:absolute md:top-72 md:left-1 md:text-orange-400 md:hover:cursor-pointer' onClick={()=>hanldeDirection('l')} size={20}/>
         <BsArrowRightCircle className='absolute top-72 right-1 md:absolute md:top-72 md:right-1 md:text-orange-400 md:hover:cursor-pointer' onClick={()=>hanldeDirection('r')} size={20}/>

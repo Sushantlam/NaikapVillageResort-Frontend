@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../UseContext/Auth'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
@@ -21,17 +21,19 @@ const Login = () => {
       }
     //   console.log(data);
 
-const hanldeClick =async(e)=>{
+const handleClick =async(e)=>{
     e.preventDefault()
    dispatch({type:'Login_Start'})
    try {
-    const res = await axios.post('/user/login', credential)
+    const res = await axios.post('https://naikap-node-api.onrender.com/user/login', credential)
     console.log('Login_Start', res);
     dispatch({type:'Login_Success', payload: res.data.details})
     navigate("/")
     
    } 
    catch (error) {
+
+    console.log(error);
     
      dispatch({ type: "Login_Fail", payload: error.response.data })
      navigate("/login")
@@ -39,17 +41,20 @@ const hanldeClick =async(e)=>{
       }
     
   return (
-    <div>
-
-        
+    <div className=' h-[100vh] flex justify-center items-center'>
+    <form className='flex flex-col gap-5 border border-gray-800 rounded-md px-6  py-4' onSubmit={handleClick}>
             <label htmlFor="">Email</label>
-               <input type="text" id="email" onChange={handleChnage}  className='border border-black' />
+               <input  type="text" id="email" onChange={handleChnage}  className=' p-1 border-2 rounded-md'  />
                <label htmlFor="">Password</label>
-               <input type="text" id="password" onChange={handleChnage}   className='border border-black' />
+               <input type="text" id="password" onChange={handleChnage}    className=' p-1 border-2 rounded-md'  />
 
-           <button onClick={hanldeClick}>Button</button>
+          
        
-{error  && <p>{error}</p> }
+{error  && <p className=' text-red-600'>{error}</p> }
+<button className=' bg-lime-400 p-2 border rounded-xl' type='submit'>Login</button>
+<Link to='/signup'>   <span className=' px-2 py-1 text-blue-600 rounded-lg'>Dont have account? Sign Up</span></Link>
+   
+      </form>
     </div>
   )
 }

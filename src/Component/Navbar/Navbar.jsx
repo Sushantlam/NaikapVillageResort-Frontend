@@ -1,14 +1,38 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { IoLocationSharp } from 'react-icons/io5';
 import { MdLocalPhone, MdEmail } from 'react-icons/md';
 import { FaFacebookSquare, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
+
 import { Link, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../UseContext/Auth';
 const Navbar = () => {
+
+  const {email, dispatch, error}= useContext(AuthContext)
+  console.log(email);
   const [nav, setNav] = useState(false)
   const handleNav = () => {
     setNav(!nav)
   }
+
+  const [drop, setDrop] = useState(false)
+  const dropDown = () => {
+    setDrop(!drop)
+  }
+  const navigate = useNavigate()
+  function logOut(){
+    try {
+      dispatch({ type: "Log_Out" })
+      navigate("/login")
+     
+    
+    } catch (error) {
+        console.log();
+
+    }
+  }
+
+
   return (
     <>
       <div className=' sticky top-0 z-50 bg-white'>
@@ -42,12 +66,26 @@ const Navbar = () => {
              <Link to='/things'> <li className='p-3'>Things To Do</li></Link>
               <Link to='/gallery'> <li className='p-3'>Gallery</li></Link>
               <Link to='/contactus'> <li className='p-3'>Contact Us</li></Link>
-              <Link to='/about'> <li className='p-3'>About Us</li></Link>
+               <li className='p-3'>About Us</li>
+
+            {email ? <div className=' h-9 w-9 rounded-full relative'>
+              <img src={email?.images?.url} onClick={dropDown} className=' cursor-pointer h-[100%] w-[100%] flex justify-center items-center rounded-full' alt="" />
+            
+            
+            </div>: <div className=' flex gap-2 justify-between items-center'>
+            <Link to='/login'>   <button className='bg-black px-2 py-1 text-white rounded-lg' >Login</button></Link>
+            <Link to='/signup'>   <button className='bg-white px-2 py-1 text-black rounded-lg'>Signup</button></Link>
+            </div> }
+              {email &&  <li className='py-2 ml-2 px-1 bg-red-600 rounded-lg cursor-pointer' onClick={logOut}>Log Out</li>}
+
+              
 
             </ul>
 
-            <div onClick={handleNav} className='block pr-3  md:hidden lg:hidden'>
+            <div onClick={handleNav} className=' flex gap-2 justify-center items-center pr-3  md:hidden lg:hidden'>
+           
               {nav ? <AiOutlineClose size={20} /> : < AiOutlineMenu size={20} />}
+             
             </div>
 
             <ul className={nav ? 'fixed left-0 top-0 w-[80%] pt-16 pl-10  z-50 h-full bg-green-85bc22 border-r border-r-gray-900 ease-in-out duration-100' : 'ease-in-out duration-100 fixed left-[-100%]'}>
@@ -57,6 +95,8 @@ const Navbar = () => {
             <Link to='/gallery'> <li className='p-3'>Gallery</li></Link>
             <Link to='/contactus'> <li className='p-3'>About Us</li></Link>
             <Link to='/about'> <li className='p-3'>Contact Us</li></Link>
+            <li className='p-3' onClick={logOut}>Log Out</li>
+            
 
             </ul>
 

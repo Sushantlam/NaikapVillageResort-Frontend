@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import useFetch from '../../hooks/useFetch'
 import axios from 'axios'
 import { ImCross } from 'react-icons/im';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../UseContext/Auth';
 
 
 const Reserve = ({ hotelId, time, setOpen }) => {
     const navigate = useNavigate()
     const { data, error, loading } = useFetch(`https://naikap-node-api.onrender.com/room/find/roomNumber/${hotelId}`)
 
+    const {email, dispatch, }= useContext(AuthContext)
  const [selectedRoom, setSelectedRoom]= useState([])
     const handleChange=(e)=>{
         const checked = e.target.checked
@@ -48,15 +50,22 @@ const Reserve = ({ hotelId, time, setOpen }) => {
 
  }
 
+ 
  async function handleReserve(){
+
+ 
     try {
+        if(email){
         await Promise.all(selectedRoom.map(async(roomId)=>{
             const res = await axios.put(`https://naikap-node-api.onrender.com/roomNumber/update/${roomId}`, {din: allDates})
             console.log(res);
             if(res.status===201){
                 navigate("/thankyou")
             }
-        }))
+        }))}
+        else{
+            navigate("/login")
+        }
     } catch (error) {
         console.log(error);
     }
@@ -98,7 +107,7 @@ const Reserve = ({ hotelId, time, setOpen }) => {
 
                     )
                 })}
-                  <button onClick={handleReserve} className='bg-green-85bc22 text-lg font-semibold p-3 rounded' >Button</button>
+                <button onClick={handleReserve} className='bg-green-85bc22 text-lg font-semibold p-3 rounded' >Button</button>
             </div>
         </div>
     )
