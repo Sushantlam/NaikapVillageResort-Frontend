@@ -7,8 +7,8 @@ const ThingsToDo = () => {
     <div className='h-[45vh]'>
 
    
-    <h1 className=' text-center text-3xl text-green-85bc22 mt-8  '>Thank you for choosing us</h1>
-    <h3 className=' text-center text-3xl '>Your booking is placed</h3>
+    <h1 className=' text-center text-3xl text-green-85bc22 mt-8  '>Its on work </h1>
+   
     </div>
     <Footer/></>
   )
