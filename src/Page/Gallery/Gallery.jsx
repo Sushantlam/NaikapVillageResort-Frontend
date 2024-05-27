@@ -2,7 +2,14 @@ import React from 'react'
 
 const Gallery = () => {
   return (
-    <div>Gallery</div>
+    <>
+    <Navbar/>
+    <div className=' min-h-[50vh]'>
+   <h3 className=' text-center font-serif text-3xl'> Its on work </h3>
+    </div>
+  
+   <Footer/>
+   </>
   )
 }
 

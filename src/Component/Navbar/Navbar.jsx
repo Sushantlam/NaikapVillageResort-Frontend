@@ -66,8 +66,8 @@ const Navbar = () => {
              <Link to='/things'> <li className='p-3'>Things To Do</li></Link>
               <Link to='/gallery'> <li className='p-3'>Gallery</li></Link>
               <Link to='/contactus'> <li className='p-3'>Contact Us</li></Link>
-               <li className='p-3'>About Us</li>
-
+              <Link to='/about'> <li className='p-3'>About Us</li></Link>
+             
             {email ? <div className=' h-9 w-9 rounded-full relative'>
               <img src={email?.images?.url} onClick={dropDown} className=' cursor-pointer h-[100%] w-[100%] flex justify-center items-center rounded-full' alt="" />
             
