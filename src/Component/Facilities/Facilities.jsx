@@ -8,7 +8,7 @@ const Facilities = () => {
   return (
     <>
     <div className='flex flex-col md:flex-row-reverse md:mt-14 justify-evenly items-center gap-1 max-w-[1340px]  mx-auto p-4 max-h-[1340px]'>
-    <img src="https://paradisevilla.com.np/wp-content/uploads/2021/11/mix.png" className='w-full md:max-w-[40%] max-h-[300px] hover:scale-130' alt="" />
+    <img src="/Com.webp" className='w-full md:max-w-[40%] max-h-[300px] hover:scale-130' alt="" />
     <div className='w-full flex flex-col px-4  md:max-w-[50%] md:flex md:flex-col items-center gap-7'>
 
           <h1 className=' text-center text-2xl md:text-2xl font-extrabold font-serif'>Our Hotel Facilities</h1>
